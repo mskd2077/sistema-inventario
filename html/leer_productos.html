@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <!-- Incluye la biblioteca Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-PCk6BDU3A7f3GPXXGcwhFbJgQOiCfJ1OU6/VaOzLnOYdCLPwFhlKcpDxf7Ws3o/FCzUoTof6fKmnvnhvg5hEkA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/script.js"></script>
+</head>
+<body>
+    <h2>Lista de Productos</h2>
+    <div id="productos">
+        <!-- Aquí se cargarán los productos mediante AJAX -->
+    </div>
+    <button onclick="location.href='../html/crear_producto.html';"><i class='fas fa-plus'></i> Agregar Producto</button>
+    <form action="../php/logout.php" method="post">
+        <input type="submit" value="Cerrar Sesión">
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            // Función para cargar productos con AJAX al cargar la página
+            cargarProductos();
+        });
+
+        function cargarProductos() {
+            $.ajax({
+                url: '../php/leer_productos.php',
+                type: 'GET',
+                success: function(data) {
+                    $('#productos').html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
